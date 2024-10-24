@@ -1,0 +1,76 @@
+/***********************************************************
+        Form View : Handle required fields with as  Asterisk(*)
+************************************************************/
+.o_form_sheet, .o_form_nosheet {
+    .o_required_modifier {
+      position: relative;
+  
+      &::before {
+        content: '*';
+        color: red;
+        left: -10px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 1;
+      }
+    }
+    .o_required_modifier.o_field_text,
+    .o_required_modifier.o_field_html {
+      &::before {
+        top: 12px;
+        transform: translateY(-50%);
+      }
+    }
+}
+
+.o_form_sheet, .o_form_nosheet {
+    h1 {
+        .o_required_modifier {
+            &::before {
+                left: -15px;
+                }
+            }
+    }
+}
+
+
+
+$input-border-color: #cccccc;
+$input-border-color-focus: #71639e;
+$input-background-color-required: #d2d2ff;
+$input-color-placeholder-required: #6c757d;
+$button-border-color: #dee2e6;
+
+
+/***********************************************************
+        Form View : Handle Background for required fields-2
+************************************************************/
+
+// .o_required_modifier:not(.o_readonly_modifier) {
+//         background-color: $input-background-color-required !important;
+//         ::placeholder {
+//             color: $input-color-placeholder-required;
+//         }
+
+//     .o_external_button {
+//         background-color: $input-background-color-required !important;
+//     }
+// }
+
+// .o_required_modifier {
+//     div.d-flex {
+//         align-items: center !important;
+//     }
+// }
+
+// .o_required_modifier.o_field_selection:not(.o_readonly_modifier) {
+//     background-color: $input-background-color-required !important;
+// }
+
+// list-view background-color for mandatory
+// .o_list_renderer {
+//     .o_required_modifier {
+//         background-color: #fff !important;
+//     }
+// }
