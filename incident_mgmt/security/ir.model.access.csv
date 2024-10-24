@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_incident_type_system,incident.type.system,model_incident_type,base.group_system,1,1,1,1
+access_incident_type_manager,incident.type.manager,model_incident_type,base.group_erp_manager,1,1,1,0
+
+access_incident_team_system,incident.team.system,model_incident_team,base.group_system,1,1,1,1
+access_incident_team_manager,incident.team.manager,model_incident_team,base.group_erp_manager,1,1,1,0
+access_incident_team_user,incident.team.user,model_incident_team,base.group_user,1,1,1,0
+
+access_team_incidents_system,team.incidents.system,model_team_incidents,base.group_system,1,1,1,1
+access_team_incidents_manager,team.incidents.manager,model_team_incidents,base.group_erp_manager,1,1,1,0
+access_team_incidents_user,team.incidents.user,model_team_incidents,base.group_user,1,1,1,0
+
+access_team_incidents_state,team.incidents.state,model_team_incidents_state,base.group_user,1,1,1,1

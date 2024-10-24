@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="incident_mgmt_team_incident_state_wizard" model="ir.ui.view">
+        <field name="name">team.incident.state.wizard</field>
+        <field name="model">team.incidents.state</field>
+        <field name="arch" type="xml">
+            <form string="Reason">
+                <group colspan="4">
+                    <group>
+                        <field name="reason" />
+                        <field name="team_incidents_id" invisible="1" />
+                    </group>
+                </group>
+                <footer>
+                    <button string="Confirm" name="action_confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="team_incidents_state_action_wizard" model="ir.actions.act_window">
+        <field name="name">Reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">team.incidents.state</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="incident_mgmt_team_incident_state_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

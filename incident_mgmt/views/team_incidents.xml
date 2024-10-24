@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="team_incidents_view_list" model="ir.ui.view">
+        <field name="name">team.incidents.view.list</field>
+        <field name="model">team.incidents</field>
+        <field name="arch" type="xml">
+           <list string="Incident Teams">
+                <field name="name"/>
+                <field name="involved_user_id" widget="many2one_avatar_user"/>
+                <field name="create_uid" string=" Incident Reported By" widget="many2one_avatar_user"/>
+                <field name="attention_type" decoration-bf="1"/>
+                <field name="incident_type_id"/>
+                <field name="team_id"/>
+                <field name="state" widget="badge" decoration-success="state == 'resolved'" decoration-danger="state == 'cancelled'" decoration-info="state == 'open'"/>
+                <field name="create_date" string="Created on" widget="remaining_days"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="team_incidents_view_search" model="ir.ui.view">
+        <field name="name">team.incidents.view.search</field>
+        <field name="model">team.incidents</field>
+        <field name="arch" type="xml">
+            <search>
+                 <field name="involved_user_id"/>
+                <field name="team_id"/>
+                <field name="create_date"/>
+                <field name="state"/>
+                <field name="incident_type_id"/>
+                <filter string="Open Incidents" domain="[('state','=','open')]" help="Open Incident" name="open_incident"/>
+                <filter string="Cancelled Incidents" domain="[('state','=','cancelled')]" help="Cancelled Incident" name="cancelled_incident"/>
+                <filter string="Resolved Incidents" domain="[('state','=','resolved')]" help="Resolved Incident" name="resolved_incident"/>
+                <group>
+                    <filter name="group_involved_user_id" string="Involved Person" icon="terp-product" context="{'group_by':'involved_user_id'}"/>
+                    <filter name="group_create_uid" string="Reported By" context="{'group_by':'create_uid'}"/>
+                    <filter name="group_date" string="Month" context="{'group_by':'create_date'}"/>
+                    <filter name="group_incident_type" string="Incident Type" context="{'group_by':'incident_type_id'}"/>
+                    <filter name="group_state" string="State" context="{'group_by':'state'}"/>
+                    <filter name="group_team_id" string="Team" context="{'group_by':'team_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="team_incidents_view_form" model="ir.ui.view">
+        <field name="name">team.incidents.view.form</field>
+        <field name="model">team.incidents</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="%(incident_mgmt.team_incidents_state_action_wizard)d" string="Resolve" type="action" context="{'resolve':True}" class="oe_highlight" invisible="state == 'cancelled' or state == 'resolved'" />
+                    <button name="%(incident_mgmt.team_incidents_state_action_wizard)d" string="Cancel" type="action" context="{'cancel':True}" invisible="state == 'cancelled' or state == 'resolved'" />
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="e.g-Not Following Instructions"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="team_id"/>
+                            <field name="incident_type_id"/>
+                            <field name="attention_type" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="involved_user_id" widget="many2one_avatar_user"/>
+                            <field name="incident_date"/>
+                            <field name="create_uid" string=" Incident Reported By" invisible="create_uid == False" widget="many2one_avatar_user"/>
+                            <field name="create_date" string=" Incident Reported On" invisible="create_date == False"/>
+                        </group>
+                    </group>
+                    <label for="description"/>
+                    <field name="description"/>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="incident_mgmt_team_incidents_action" model="ir.actions.act_window">
+        <field name="name">Team Incidents</field>
+        <field name="res_model">team.incidents</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_open_incident':1}</field>
+    </record>
+
+</odoo>
